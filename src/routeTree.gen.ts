@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KlassementenRouteImport } from './routes/klassementen'
 import { Route as KlassementenModeRouteImport } from './routes/klassementen.$mode'
 import { Route as VerenigingenClubIdRouteImport } from './routes/verenigingen.$clubId'
 
@@ -18,10 +19,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const KlassementenModeRoute = KlassementenModeRouteImport.update({
-  id: '/klassementen/$mode',
-  path: '/klassementen/$mode',
+const KlassementenRoute = KlassementenRouteImport.update({
+  id: '/klassementen',
+  path: '/klassementen',
   getParentRoute: () => rootRouteImport,
+} as any)
+const KlassementenModeRoute = KlassementenModeRouteImport.update({
+  id: '/$mode',
+  path: '/$mode',
+  getParentRoute: () => KlassementenRoute,
 } as any)
 const VerenigingenClubIdRoute = VerenigingenClubIdRouteImport.update({
   id: '/verenigingen/$clubId',
@@ -31,31 +37,40 @@ const VerenigingenClubIdRoute = VerenigingenClubIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/klassementen': typeof KlassementenRouteWithChildren
   '/klassementen/$mode': typeof KlassementenModeRoute
   '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/klassementen': typeof KlassementenRouteWithChildren
   '/klassementen/$mode': typeof KlassementenModeRoute
   '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/klassementen': typeof KlassementenRouteWithChildren
   '/klassementen/$mode': typeof KlassementenModeRoute
   '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/klassementen/$mode' | '/verenigingen/$clubId'
+  fullPaths:
+    '/' | '/klassementen' | '/klassementen/$mode' | '/verenigingen/$clubId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/klassementen/$mode' | '/verenigingen/$clubId'
-  id: '__root__' | '/' | '/klassementen/$mode' | '/verenigingen/$clubId'
+  to: '/' | '/klassementen' | '/klassementen/$mode' | '/verenigingen/$clubId'
+  id:
+    | '__root__'
+    | '/'
+    | '/klassementen'
+    | '/klassementen/$mode'
+    | '/verenigingen/$clubId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  KlassementenModeRoute: typeof KlassementenModeRoute
+  KlassementenRoute: typeof KlassementenRouteWithChildren
   VerenigingenClubIdRoute: typeof VerenigingenClubIdRoute
 }
 
@@ -68,12 +83,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/klassementen': {
+      id: '/klassementen'
+      path: '/klassementen'
+      fullPath: '/klassementen'
+      preLoaderRoute: typeof KlassementenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/klassementen/$mode': {
       id: '/klassementen/$mode'
-      path: '/klassementen/$mode'
+      path: '/$mode'
       fullPath: '/klassementen/$mode'
       preLoaderRoute: typeof KlassementenModeRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof KlassementenRoute
     }
     '/verenigingen/$clubId': {
       id: '/verenigingen/$clubId'
@@ -85,9 +107,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface KlassementenRouteChildren {
+  KlassementenModeRoute: typeof KlassementenModeRoute
+}
+
+const KlassementenRouteChildren: KlassementenRouteChildren = {
+  KlassementenModeRoute: KlassementenModeRoute,
+}
+
+const KlassementenRouteWithChildren = KlassementenRoute._addFileChildren(
+  KlassementenRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  KlassementenModeRoute: KlassementenModeRoute,
+  KlassementenRoute: KlassementenRouteWithChildren,
   VerenigingenClubIdRoute: VerenigingenClubIdRoute,
 }
 export const routeTree = rootRouteImport
