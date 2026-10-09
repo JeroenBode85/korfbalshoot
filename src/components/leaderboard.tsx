@@ -23,7 +23,7 @@ function EntryName({ entry }: { entry: Entry }) {
 }
 function Podium({ entries, onShare }: { entries: Entry[]; onShare: (e: Entry) => void }) {
   return <div className="podium" aria-label="Hoogste standen">{entries.map(entry => {
-    const inner = <><span className="podium-medal">{entry.position === 1 ? <Trophy className="size-4"/> : entry.position}</span><ClubEmblem name={entry.name}/><h3>{entry.name}</h3><p>{entry.detail}</p><strong className="podium-score">{entry.score.toLocaleString('nl-NL')}</strong><small>punten{entry.clubId ? ` · ${entry.meta}` : ''}</small></>;
+    const inner = <><span className="podium-medal" aria-hidden="true">{entry.position}</span><span className="podium-rank">{entry.position === 1 && <Trophy className="size-3"/>}{entry.position}e plaats</span><ClubEmblem name={entry.name}/><h3>{entry.name}</h3><p>{entry.detail}</p><strong className="podium-score">{entry.score.toLocaleString('nl-NL')}</strong><small>punten{entry.clubId ? ` · ${entry.meta}` : ''}</small></>;
     return entry.clubId
       ? <Link to="/verenigingen/$clubId" params={{ clubId: entry.clubId }} className="podium-item" data-rank={Math.min(entry.position, 3)} key={entry.key}>{inner}</Link>
       : <button type="button" className="podium-item" data-rank={Math.min(entry.position, 3)} key={entry.key} onClick={() => onShare(entry)} aria-label={`Deel resultaat van ${entry.name}`}>{inner}</button>;

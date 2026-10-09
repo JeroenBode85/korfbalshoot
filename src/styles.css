@@ -112,20 +112,22 @@
 .ranking-meta { display: flex; justify-content: space-between; gap: 15px; font-size: 12px; color: var(--muted-foreground); padding: 17px 0; }
 .live-label { display: flex; gap: 7px; align-items: center; }
 .live-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--field); }
-.podium { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; align-items: end; max-width: 760px; margin: 22px auto 30px; }
-.podium-item { position: relative; min-height: 184px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 14px 17px; text-align: center; }
-.podium-item:first-child { order: 2; min-height: 213px; border-color: color-mix(in oklab,var(--gold) 60%, transparent); background: linear-gradient(to bottom,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card)); }
+.podium { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; align-items: end; max-width: 980px; margin: 34px auto 44px; }
+.podium-item { position: relative; min-height: 254px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 44px 18px 24px; text-align: center; }
+.podium-item:first-child { order: 2; min-height: 300px; border-color: color-mix(in oklab,var(--gold) 60%, transparent); background: linear-gradient(to bottom,color-mix(in oklab,var(--gold) 12%,var(--card)),var(--card)); box-shadow: 0 20px 44px -20px color-mix(in oklab,var(--gold) 45%, transparent); }
 .podium-item:nth-child(2) { order: 1; }
 .podium-item:nth-child(3) { order: 3; }
-.podium-medal { position: absolute; left: 50%; top: -17px; transform: translateX(-50%); width: 35px; height: 35px; border-radius: 50%; background: var(--silver); color: var(--secondary); font-weight: 900; display: grid; place-items: center; box-shadow: var(--shadow-game); }
+.podium-medal { position: absolute; left: 50%; top: -29px; transform: translateX(-50%); width: 58px; height: 58px; border-radius: 50%; background: var(--silver); color: var(--secondary); font-size: 25px; font-weight: 900; line-height: 1; display: grid; place-items: center; box-shadow: var(--shadow-game); }
 .podium-item[data-rank="1"] .podium-medal { background: var(--gold); }
 .podium-item[data-rank="3"] .podium-medal { background: var(--bronze); }
+.podium-rank { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted-foreground); margin-bottom: 13px; }
+.podium-item[data-rank="1"] .podium-rank { color: var(--gold); }
 .club-emblem { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; background: var(--accent); color: var(--foreground); border-radius: 12px; font-size: 14px; font-weight: 800; }
-.podium-item .club-emblem { margin: 0 auto 12px; width: 48px; height: 48px; border: 1px solid var(--border); }
-.podium-item h3 { font-size: 17px; font-weight: 700; overflow-wrap: anywhere; }
-.podium-item p { color: var(--muted-foreground); font-size: 12px; margin-top: 4px; }
-.podium-score { display: block; font-size: 27px; font-weight: 800; color: var(--gold); margin-top: 10px; }
-.podium-item small { font-size: 11px; color: var(--muted-foreground); }
+.podium-item .club-emblem { margin: 0 auto 14px; width: 66px; height: 66px; font-size: 20px; border-radius: 16px; border: 1px solid var(--border); }
+.podium-item h3 { font-size: 21px; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
+.podium-item p { color: var(--muted-foreground); font-size: 14px; margin-top: 5px; }
+.podium-score { display: block; font-size: 42px; font-weight: 900; line-height: 1; color: var(--gold); margin-top: 14px; }
+.podium-item small { display: block; font-size: 13px; color: var(--muted-foreground); margin-top: 6px; }
 .ranking-table-head { display: grid; grid-template-columns: 44px minmax(0,1fr) 130px 100px 44px; gap: 14px; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--muted-foreground); padding: 13px 20px; }
 .ranking-row { display: grid; grid-template-columns: 44px minmax(0,1fr) 130px 100px 44px; align-items: center; gap: 14px; padding: 13px 20px; margin-bottom: 8px; min-height: 76px; border-radius: 12px; background: var(--card); border: 1px solid var(--border); }
 .rank-number { font-size: 17px; font-weight: 700; color: var(--muted-foreground); }
@@ -231,14 +233,16 @@
   .ranking-tabs > * { min-width: 0; font-size: 12px; gap: 6px; padding-inline: 6px; }
   .ranking-tabs svg { display: none; }
   .ranking-meta { font-size: 10px; flex-wrap: wrap; gap: 8px; }
-  .podium { gap: 7px; margin-top: 27px; }
-  .podium-item { padding: 27px 6px 14px; min-height: 182px; border-radius: 12px; }
-  .podium-item:first-child { min-height: 204px; }
-  .podium-item .club-emblem { width: 37px; height: 37px; font-size: 12px; }
-  .podium-item h3 { font-size: 12px; }
+  .podium { gap: 10px; margin-top: 40px; }
+  .podium-item { padding: 36px 8px 16px; min-height: 236px; border-radius: 14px; }
+  .podium-item:first-child { min-height: 268px; }
+  .podium-medal { width: 46px; height: 46px; top: -23px; font-size: 20px; }
+  .podium-rank { font-size: 9px; letter-spacing: 1px; gap: 4px; margin-bottom: 9px; }
+  .podium-item .club-emblem { width: 48px; height: 48px; font-size: 15px; border-radius: 12px; margin-bottom: 10px; }
+  .podium-item h3 { font-size: 14px; }
   .podium-item p { font-size: 10px; }
-  .podium-score { font-size: 22px; }
-  .podium-item small { font-size: 9px; }
+  .podium-score { font-size: 30px; margin-top: 10px; }
+  .podium-item small { font-size: 10px; }
   .ranking-table-head { grid-template-columns: 25px minmax(0,1fr) 46px 44px; gap: 8px; padding-inline: 11px; font-size: 9px; }
   .ranking-table-head .participants-label { display: none; }
   .ranking-row { grid-template-columns: 25px minmax(0,1fr) 46px 44px; gap: 8px; padding: 11px; }
