@@ -273,3 +273,8 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+button.podium-item { font: inherit; color: inherit; cursor: pointer; text-align: center; border: inherit; }
+.podium-item h3, .club-name-cell h3 { overflow-wrap: anywhere; }
+.week-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; color: var(--muted-foreground); font-weight: 600; font-size: 0.9rem; }
+.week-bar label { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--foreground); }
+.week-bar select { min-height: 2.75rem; border-radius: 0.75rem; border: 1px solid var(--border); background: var(--secondary); color: var(--foreground); padding: 0 0.75rem; font: inherit; max-width: 100%; }

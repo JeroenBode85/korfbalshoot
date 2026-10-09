@@ -12,7 +12,10 @@
 
 De openbare API wordt rechtstreeks gelezen, zonder sleutel, login of schrijfrechten. Geen nieuw Cloud-project aangemaakt, geen wijzigingen in de bestaande gameomgeving. Gegevens worden 60 seconden gecachet per proces/browser en door de upstream API. Bij een nieuwe serverinstantie kan een nieuwe read plaatsvinden; upstream rate limiting moet door de eigenaar worden bevestigd. Search en limit worden upstream genegeerd; offset werkt. Websitepaginering en zoeken worden op de veilig opgehaalde clubgegevens toegepast, zonder scores of posities te herberekenen.
 
-## Ontbrekende publieke koppelingen
+## Klassementen (public-standings)
+Overall (`kind=world`), deze week (`kind=week`, ook `&week=`), wekenlijst (`kind=weeks`) en verenigingen (`kind=clubs`, met club-standings als terugval) zijn live getest op 9 okt 2026. Paginering per 100 tot offset 10000. Links: `/klassementen?type=overall|week|verenigingen&week=YYYY-MM-DD`; oude `/klassementen/{type}` verwijst door. Zoeken filtert alleen geladen resultaten.
+
+## Ontbrekende publieke koppelingen (historisch voorstel; 1–3 nu vervangen door public-standings)
 De onderstaande URL’s zijn **voorgestelde contracten, geen bestaande endpoints**:
 1. `GET /public-player-standings?mode=overall&cursor=...&limit=50&q=...`: openbare spelersnaam, publieke deel-ID (geen auth-ID), vereniging, serverpositie, record, fetched_at en paginering.
 2. `GET /public-week-standings?week=YYYY-MM-DD&cursor=...&limit=50&q=...`: dezelfde velden met weekscore; week_start, week_end, next_reset_at, server_now en fetched_at als ISO-timestamps. Server berekent maandag 00.00 Europe/Amsterdam inclusief DST. Alleen hierdoor kunnen periode en countdown betrouwbaar worden getoond.
