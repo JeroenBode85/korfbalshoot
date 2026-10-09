@@ -66,7 +66,7 @@
 .site-header { height: 88px; border-bottom: 1px solid var(--border); background: var(--secondary); }
 .header-inner { height: 100%; display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 45px; }
 .wordmark { display: flex; gap: 11px; align-items: center; font-size: 20px; line-height: .95; font-weight: 900; }
-.wordmark-symbol { width: 39px; height: 39px; color: var(--gold); transform: rotate(-18deg); }
+.wordmark-symbol { width: 39px; height: 39px; border-radius: 10px; box-shadow: 0 2px 8px rgb(0 0 0 / .28); }
 .wordmark span span { color: var(--gold); }
 .nav-links { display: flex; align-items: center; gap: 32px; font-size: 15px; font-weight: 600; }
 .nav-links a { color: var(--muted-foreground); padding-block: 16px; }
