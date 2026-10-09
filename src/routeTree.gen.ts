@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KlassementenModeRouteImport } from './routes/klassementen.$mode'
+import { Route as VerenigingenClubIdRouteImport } from './routes/verenigingen.$clubId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KlassementenModeRoute = KlassementenModeRouteImport.update({
+  id: '/klassementen/$mode',
+  path: '/klassementen/$mode',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerenigingenClubIdRoute = VerenigingenClubIdRouteImport.update({
+  id: '/verenigingen/$clubId',
+  path: '/verenigingen/$clubId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/klassementen/$mode': typeof KlassementenModeRoute
+  '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/klassementen/$mode': typeof KlassementenModeRoute
+  '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/klassementen/$mode': typeof KlassementenModeRoute
+  '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/klassementen/$mode' | '/verenigingen/$clubId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/klassementen/$mode' | '/verenigingen/$clubId'
+  id: '__root__' | '/' | '/klassementen/$mode' | '/verenigingen/$clubId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KlassementenModeRoute: typeof KlassementenModeRoute
+  VerenigingenClubIdRoute: typeof VerenigingenClubIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/klassementen/$mode': {
+      id: '/klassementen/$mode'
+      path: '/klassementen/$mode'
+      fullPath: '/klassementen/$mode'
+      preLoaderRoute: typeof KlassementenModeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verenigingen/$clubId': {
+      id: '/verenigingen/$clubId'
+      path: '/verenigingen/$clubId'
+      fullPath: '/verenigingen/$clubId'
+      preLoaderRoute: typeof VerenigingenClubIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KlassementenModeRoute: KlassementenModeRoute,
+  VerenigingenClubIdRoute: VerenigingenClubIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
