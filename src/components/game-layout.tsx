@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
-import { CircleDot, Download, Play, Trophy } from 'lucide-react';
+import { Download, Play, Trophy } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
+import appIcon from '@/assets/app-icon.png.asset.json';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { gameConfig } from '@/lib/game-config';
@@ -9,7 +10,7 @@ export function PlayButton({ compact = false }: { compact?: boolean }) {
   return <Button variant="game" className={compact ? 'header-download' : ''} asChild><a href={gameConfig.playUrl} target="_blank" rel="noopener noreferrer"><Play fill="currentColor" />{gameConfig.comingSoon ? 'Binnenkort op Google Play' : compact ? 'Download de game' : 'Download op Google Play'}</a></Button>;
 }
 export function Wordmark() {
-  return <Link to="/" className="wordmark" aria-label="Korfbal Shoot! Startpagina"><CircleDot className="wordmark-symbol"/><span>KORFBAL<br/><span>SHOOT!</span></span></Link>;
+  return <Link to="/" className="wordmark" aria-label="Korfbal Shoot! Startpagina"><img className="wordmark-symbol" src={appIcon.url} alt="" width="39" height="39"/><span>KORFBAL<br/><span>SHOOT!</span></span></Link>;
 }
 export function GameLayout({ children, active = 'home' }: { children: ReactNode; active?: 'home' | 'rankings' }) {
   const [info, setInfo] = useState<'privacy' | 'contact' | null>(null);
