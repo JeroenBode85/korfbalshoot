@@ -87,7 +87,7 @@
 .hero-note { display: flex; gap: 7px; align-items: center; margin-top: 22px; color: var(--muted-foreground); font-size: 12px; }
 .hero-note svg { width: 14px; height: 14px; color: var(--gold); }
 .hero-art { position: relative; height: 558px; display: flex; align-items: center; justify-content: center; }
-.hero-art img { width: 315px; height: 558px; object-fit: cover; mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 91%, transparent 100%); }
+.hero-art img { width: 270px; height: 558px; object-fit: contain; mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 91%, transparent 100%); }
 .art-record { position: absolute; bottom: 62px; right: 10px; background: var(--secondary); border: 1px solid var(--border); padding: 12px 20px; border-radius: 14px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-game); transform: rotate(-5deg); }
 .art-record svg { color: var(--gold); width: 30px; height: 30px; }
 .art-record strong { display: block; font-size: 15px; }
@@ -189,7 +189,7 @@
   .hero-title { font-size: 64px; }
   .hero-slogan { font-size: 27px; }
   .hero-actions { flex-direction: column; align-items: start; }
-  .hero-art img { width: 280px; height: 540px; }
+  .hero-art img { width: 261px; height: 540px; }
   .feature-bar-item { gap: 10px; }
   .feature-bar-item strong { font-size: 12px; }
   .feature-bar-item small { font-size: 11px; }
@@ -216,7 +216,7 @@
   .hero-note { justify-content: center; margin-top: 18px; font-size: 11px; }
   .hero-art { height: 288px; margin-top: 10px; overflow: hidden; }
   .hero-art img { width: 200px; height: 414px; align-self: start; object-position: top; }
-  .art-record { right: 0; bottom: 29px; font-size: 12px; padding: 10px 13px; }
+  .art-record { display: none; }
   .art-record svg { width: 22px; height: 22px; }
   .art-record strong { font-size: 12px; }
   .art-record small { font-size: 10px; }
@@ -229,7 +229,7 @@
   .section-share { padding-inline: 0; width: 44px; box-shadow: none; border-radius: 10px; }
   .section-share span { display: none; }
   .ranking-tabs > * { min-width: 0; font-size: 12px; gap: 6px; padding-inline: 6px; }
-  .ranking-tabs svg { width: 15px; }
+  .ranking-tabs svg { display: none; }
   .ranking-meta { font-size: 10px; flex-wrap: wrap; gap: 8px; }
   .podium { gap: 7px; margin-top: 27px; }
   .podium-item { padding: 27px 6px 14px; min-height: 182px; border-radius: 12px; }
