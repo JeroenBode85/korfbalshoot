@@ -15,12 +15,10 @@ export const Route = createFileRoute('/klassementen')({
   validateSearch: searchSchema,
   loaderDeps: ({ search }) => ({ type: search.type, week: search.type === 'week' ? search.week : undefined }),
   loader: async ({ deps, context }) => {
-    if (deps.type === 'verenigingen') await context.queryClient.ensureQueryData(clubsQuery);
-    else {
-      await context.queryClient.ensureQueryData(playersQuery(deps.type === 'week' ? 'week' : 'world', deps.week));
-      if (deps.type === 'week') await context.queryClient.ensureQueryData(weeksQuery);
-    }
-    return deps;
+    const qc = context.queryClient;
+    if (deps.type === 'verenigingen') return { ...deps, initial: { clubs: await qc.ensureQueryData(clubsQuery) } };
+    const [players, weeks] = await Promise.all([qc.ensureQueryData(playersQuery(deps.type === 'week' ? 'week' : 'world', deps.week)), deps.type === 'week' ? qc.ensureQueryData(weeksQuery) : undefined]);
+    return { ...deps, initial: { players, weeks } };
   },
   head: ({ loaderData }) => {
     const label = loaderData ? (loaderData.type === 'week' && loaderData.week ? `Week ${formatWeek(loaderData.week)}` : rankingLabels[loaderData.type]) : 'Klassementen';
@@ -30,6 +28,6 @@ export const Route = createFileRoute('/klassementen')({
 });
 
 function RankingPage() {
-  const { type, week } = Route.useLoaderData();
-  return <GameLayout active="rankings"><Leaderboard mode={type} week={week} full/></GameLayout>;
+  const { type, week, initial } = Route.useLoaderData();
+  return <GameLayout active="rankings"><Leaderboard key={`${type}-${week ?? ''}`} mode={type} week={week} initial={initial} full/></GameLayout>;
 }

@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, Building2, CalendarDays, Clock, Info, Loader2, RefreshCw, Search, Share2, Trophy, Users } from 'lucide-react';
 import { Button } from './ui/button';
 import { ShareDialog } from './share-dialog';
-import { clubsQuery, formatTime, formatWeek, initials, playersQuery, weeksQuery, type Club, type Player } from '@/lib/standings';
+import { clubsQuery, formatTime, formatWeek, initials, playersQuery, weeksQuery, type Club, type ClubResult, type Player, type PlayerResult } from '@/lib/standings';
+
+export type InitialStandings = { clubs?: ClubResult | undefined; players?: PlayerResult | undefined; weeks?: { weeks: string[]; error: boolean } | undefined };
 import { rankingLabels, type RankingMode } from '@/lib/game-config';
 import type { ShareData } from '@/lib/share-card';
 
@@ -41,12 +43,12 @@ function Countdown({ end }: { end: string }) {
   return <span><Clock className="inline size-4"/> Nog {d > 0 ? `${d}d ` : ''}{h}u {m}m tot de nieuwe week</span>;
 }
 
-export function Leaderboard({ mode = 'verenigingen', full = false, week }: { mode?: RankingMode; full?: boolean; week?: string }) {
+export function Leaderboard({ mode = 'verenigingen', full = false, week, initial = {} }: { mode?: RankingMode; full?: boolean; week?: string | undefined; initial?: InitialStandings }) {
   const navigate = useNavigate();
   const isClubs = mode === 'verenigingen';
-  const clubs = useQuery({ ...clubsQuery, enabled: isClubs });
-  const players = useQuery({ ...playersQuery(mode === 'week' ? 'week' : 'world', mode === 'week' ? week : undefined), enabled: !isClubs });
-  const weeks = useQuery({ ...weeksQuery, enabled: mode === 'week' });
+  const clubs = useQuery({ ...clubsQuery, enabled: isClubs, ...(initial.clubs ? { initialData: initial.clubs, refetchOnMount: false } : {}) });
+  const players = useQuery({ ...playersQuery(mode === 'week' ? 'week' : 'world', mode === 'week' ? week : undefined), enabled: !isClubs, ...(initial.players ? { initialData: initial.players, refetchOnMount: false } : {}) });
+  const weeks = useQuery({ ...weeksQuery, enabled: mode === 'week', ...(initial.weeks ? { initialData: initial.weeks, refetchOnMount: false } : {}) });
   const [search, setSearch] = useState('');
   const [limit, setLimit] = useState(8);
   const [shareData, setShareData] = useState<ShareData | null>(null);
@@ -65,7 +67,7 @@ export function Leaderboard({ mode = 'verenigingen', full = false, week }: { mod
   const weekEnd = players.data?.weekEnd ?? null;
   const subtitle = mode === 'week' && currentWeek ? `Weekklassement · ${formatWeek(currentWeek)}` : rankingLabels[mode] === 'Overall' ? 'Overall klassement' : 'Verenigingen';
   const pageUrl = () => `${window.location.origin}/klassementen?type=${mode}${mode === 'week' && currentWeek ? `&week=${currentWeek}` : ''}`;
-  const shareEntry = (e: Entry) => setShareData({ title: e.name, subtitle, position: e.position, score: e.score, detail: e.clubId ? undefined : e.detail, fetchedAt, url: e.clubId ? `${window.location.origin}/verenigingen/${encodeURIComponent(e.clubId)}` : pageUrl() });
+  const shareEntry = (e: Entry) => setShareData({ title: e.name, subtitle, position: e.position, score: e.score, ...(e.clubId ? {} : { detail: e.detail }), fetchedAt, url: e.clubId ? `${window.location.origin}/verenigingen/${encodeURIComponent(e.clubId)}` : pageUrl() });
   const loading = active.isPending;
   const noun = isClubs ? 'verenigingen' : 'spelers';
 

@@ -89,7 +89,7 @@ export function formatTime(value: string) { return value ? new Intl.DateTimeForm
 const dayFormat = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', day: 'numeric', month: 'short' });
 // week is the Monday (YYYY-MM-DD, Amsterdam); display Monday–Sunday.
 export function formatWeek(week: string) {
-  const [y, m, d] = week.split('-').map(Number);
+  const [y = 1970, m = 1, d = 1] = week.split('-').map(Number);
   const start = new Date(Date.UTC(y, m - 1, d, 12));
   const end = new Date(Date.UTC(y, m - 1, d + 6, 12));
   return `${dayFormat.format(start)} – ${dayFormat.format(end)} ${y}`;
