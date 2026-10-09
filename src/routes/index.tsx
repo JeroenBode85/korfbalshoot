@@ -5,10 +5,8 @@ import { Leaderboard } from '@/components/leaderboard';
 import { Button } from '@/components/ui/button';
 import { clubsQuery } from '@/lib/standings';
 import { pageHead } from '@/lib/page-head';
-import start from '@/assets/start.png.asset.json';
-import balls from '@/assets/balls.png.asset.json';
-import day from '@/assets/day.png.asset.json';
-import night from '@/assets/night.png.asset.json';
+import { images } from '@/lib/images';
+const { start, balls, day, night } = images;
 
 export const Route = createFileRoute('/')({
   head: () => pageHead('Korfbal Shoot! · Raak de korf. Breek je record.', 'Time je schot, ontwijk de verdediger en speel jouw vereniging naar de top. Ontdek Korfbal Shoot! en de openbare verenigingsklassementen.'),

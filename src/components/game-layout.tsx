@@ -1,7 +1,8 @@
 import { Link } from '@tanstack/react-router';
 import { Download, Play, Trophy } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
-import appIcon from '@/assets/app-icon.png.asset.json';
+import { images } from '@/lib/images';
+const appIcon = images.appIcon;
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { gameConfig } from '@/lib/game-config';
