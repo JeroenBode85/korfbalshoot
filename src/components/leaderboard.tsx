@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ArrowDown, ArrowRight, Building2, CalendarDays, Info, RefreshCw, Search, Share2, Trophy, Users } from 'lucide-react';
 import { Button } from './ui/button';
 import { ShareDialog } from './share-dialog';
-import { clubsQuery, formatTime, initials, type Club } from '@/lib/standings';
+import { clubsQuery, formatTime, initials, type Club, type ClubResult } from '@/lib/standings';
 import { rankingLabels, type RankingMode } from '@/lib/game-config';
 import type { ShareData } from '@/lib/share-card';
 
@@ -15,8 +15,8 @@ export function Podium({ clubs }: { clubs: Club[] }) {
 export function RankingRow({ club, onShare }: { club: Club; onShare: (club: Club) => void }) {
   return <div className="ranking-row"><span className="rank-number">{club.position}</span><Link to="/verenigingen/$clubId" params={{ clubId: club.id }} className="club-name-cell"><ClubEmblem name={club.name}/><div className="min-w-0"><h3>{club.name}</h3><p>{club.city} <span className="sm:hidden">· {club.participants} spelers</span></p></div></Link><span className="participants"><Users/>{club.participants} {club.participants === 1 ? 'speler' : 'spelers'}</span><strong className="row-score">{club.score.toLocaleString('nl-NL')}</strong><Button variant="ghost" size="icon" title={`Deel ${club.name}`} aria-label={`Deel ${club.name}`} onClick={() => onShare(club)}><Share2 className="text-muted-foreground"/></Button></div>;
 }
-export function Leaderboard({ mode = 'verenigingen', full = false }: { mode?: RankingMode; full?: boolean }) {
-  const { data, refetch, isFetching } = useSuspenseQuery(clubsQuery);
+export function Leaderboard({ mode = 'verenigingen', full = false, initialResult }: { mode?: RankingMode; full?: boolean; initialResult: ClubResult }) {
+  const { data, refetch, isFetching } = useSuspenseQuery({ ...clubsQuery, initialData: initialResult, refetchOnMount: false });
   const [search, setSearch] = useState('');
   const [limit, setLimit] = useState(8);
   const [shareData, setShareData] = useState<ShareData | null>(null);
