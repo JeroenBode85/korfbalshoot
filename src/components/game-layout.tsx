@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { Download, Play, Trophy } from 'lucide-react';
+import { Download, Mail, Play, Trophy } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { images } from '@/lib/images';
 const appIcon = images.appIcon;
