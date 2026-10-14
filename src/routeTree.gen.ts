@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as KlassementenRouteImport } from './routes/klassementen'
+import { Route as PrivacyverklaringRouteImport } from './routes/privacyverklaring'
 import { Route as KlassementenModeRouteImport } from './routes/klassementen.$mode'
 import { Route as VerenigingenClubIdRouteImport } from './routes/verenigingen.$clubId'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const KlassementenRoute = KlassementenRouteImport.update({
   id: '/klassementen',
   path: '/klassementen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyverklaringRoute = PrivacyverklaringRouteImport.update({
+  id: '/privacyverklaring',
+  path: '/privacyverklaring',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KlassementenModeRoute = KlassementenModeRouteImport.update({
@@ -38,12 +44,14 @@ const VerenigingenClubIdRoute = VerenigingenClubIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/klassementen': typeof KlassementenRouteWithChildren
+  '/privacyverklaring': typeof PrivacyverklaringRoute
   '/klassementen/$mode': typeof KlassementenModeRoute
   '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/klassementen': typeof KlassementenRouteWithChildren
+  '/privacyverklaring': typeof PrivacyverklaringRoute
   '/klassementen/$mode': typeof KlassementenModeRoute
   '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
@@ -51,19 +59,30 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/klassementen': typeof KlassementenRouteWithChildren
+  '/privacyverklaring': typeof PrivacyverklaringRoute
   '/klassementen/$mode': typeof KlassementenModeRoute
   '/verenigingen/$clubId': typeof VerenigingenClubIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/klassementen' | '/klassementen/$mode' | '/verenigingen/$clubId'
+    | '/'
+    | '/klassementen'
+    | '/privacyverklaring'
+    | '/klassementen/$mode'
+    | '/verenigingen/$clubId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/klassementen' | '/klassementen/$mode' | '/verenigingen/$clubId'
+  to:
+    | '/'
+    | '/klassementen'
+    | '/privacyverklaring'
+    | '/klassementen/$mode'
+    | '/verenigingen/$clubId'
   id:
     | '__root__'
     | '/'
     | '/klassementen'
+    | '/privacyverklaring'
     | '/klassementen/$mode'
     | '/verenigingen/$clubId'
   fileRoutesById: FileRoutesById
@@ -71,6 +90,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   KlassementenRoute: typeof KlassementenRouteWithChildren
+  PrivacyverklaringRoute: typeof PrivacyverklaringRoute
   VerenigingenClubIdRoute: typeof VerenigingenClubIdRoute
 }
 
@@ -88,6 +108,13 @@ declare module '@tanstack/react-router' {
       path: '/klassementen'
       fullPath: '/klassementen'
       preLoaderRoute: typeof KlassementenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacyverklaring': {
+      id: '/privacyverklaring'
+      path: '/privacyverklaring'
+      fullPath: '/privacyverklaring'
+      preLoaderRoute: typeof PrivacyverklaringRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/klassementen/$mode': {
@@ -122,6 +149,7 @@ const KlassementenRouteWithChildren = KlassementenRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   KlassementenRoute: KlassementenRouteWithChildren,
+  PrivacyverklaringRoute: PrivacyverklaringRoute,
   VerenigingenClubIdRoute: VerenigingenClubIdRoute,
 }
 export const routeTree = rootRouteImport
