@@ -9,7 +9,7 @@ export const Route = createFileRoute('/privacyverklaring')({
   component: PrivacyPage,
 });
 
-function Fill({ children }: { children: React.ReactNode }) {
+function Fill({ children }: { children: ReactNode }) {
   return <span className="legal-fill" title="Nog in te vullen door de beheerder">{children}</span>;
 }
 
