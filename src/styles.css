@@ -303,7 +303,7 @@ button.podium-item { font: inherit; color: inherit; cursor: pointer; text-align:
 .legal-body h2 { font-size: 22px; font-weight: 700; }
 .legal-body p { margin-top: 12px; color: var(--muted-foreground); font-size: 15px; line-height: 1.75; }
 .legal-note { border-left: 3px solid var(--gold); padding-left: 14px; color: var(--foreground); font-weight: 600; }
-.legal-fill { display: inline-block; padding: 2px 8px; border-radius: 8px; border: 1px dashed color-mix(in oklab, var(--gold) 55%, transparent); background: color-mix(in oklab, var(--gold) 13%, transparent); color: var(--foreground); font-size: .95em; }
+.legal-fill { display: inline; padding: 1px 6px; border-radius: 8px; border: 1px dashed color-mix(in oklab, var(--gold) 55%, transparent); background: color-mix(in oklab, var(--gold) 13%, transparent); color: var(--foreground); font-size: .95em; }
 .legal-open .legal-fill { display: block; padding: 14px 16px; line-height: 1.7; }
 @media (max-width: 640px) {
   .legal-page { padding-top: 25px; }
