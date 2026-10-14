@@ -5,7 +5,7 @@
 - Live openbare clubstanden: alle pagina’s worden alleen-lezen opgehaald, maximaal zes verzoeken, 100 clubs per pagina. De huidige API levert 450 clubs.
 - Zoeken op clubnaam en plaats, meer laden, veilige clubpagina’s, originele serverposities (gelijke standen behouden).
 - Native delen, link kopiëren, vierkante PNG (1080 × 1080) en story-PNG (1080 × 1920), inclusief ophaalmoment.
-- Eigen server-gerenderde titel en Open Graph-beschrijving voor startpagina, ranglijsten en iedere club.
+- Eigen server-gerenderde titel en Open Graph-beschrijving voor startpagina, ranglijsten, iedere club en de privacyverklaring.
 
 ## Configuratie
 `src/lib/game-config.ts`: Play Store-link en `comingSoon`. Zet `comingSoon` op `true` voor de tekst “Binnenkort op Google Play”. De openbare beschikbaarheid en appbeoordelingen zijn niet geverifieerd; er worden geen ratings of downloadaantallen getoond.
@@ -34,7 +34,7 @@ De clubnaam, stand en score worden al in server-gerenderde metadata getoond. Een
 - Startscherm, ballencollectie, dagveld en nachtveld zijn als originele assets opgeslagen.
 - Voor een nog vrijere openingscompositie: los transparant logo, korf+paal en geel-blauwe bal aanleveren. De huidige screenshot blijft intact qua verhouding.
 - Geen clublogo’s aangeleverd: initialenemblemen gebruikt.
-- Officiële privacyverklaring en contactgegevens ontbreken; de footer noemt dit eerlijk en verzint niets.
+- De privacyverklaring van de eigenaar (versie 14 oktober 2026) staat als eigen pagina op `/privacyverklaring`, met de voettekstmknop als koppeling. Drie velden zijn nog niet ingevuld en worden op de pagina als zodanig gemarkeerd: naam verantwoordelijke persoon of organisatie met adres, e-mailadres, en de juridische grondslagen inclusief opslagregio en eventuele doorgifte buiten de EER met waarborgen. Contactgegevens ontbreken nog; de contactknop in de voettekst zegt dit eerlijk en verzint niets.
 - Deelkaarten gebruiken momenteel typografische branding; voor het originele grafische game-logo in de kaart is een transparant los logo nodig.
 
 ## Publicatie

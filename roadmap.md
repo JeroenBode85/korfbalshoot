@@ -7,4 +7,6 @@
 - [x] Overall, week (incl. earlier weeks + countdown) and club rankings via public-standings API
 - [ ] Contributing players per club — blocked by missing public endpoint
 - [ ] Crawler preview images — blocked by approved public image hosting/endpoint; no backend changes authorized
-- [ ] Official privacy/contact content — awaiting supplied text
+- [x] Privacyverklaring opgenomen als eigen pagina (/privacyverklaring) met server-gerenderde metadata en voettekstkoppeling
+- [ ] Invullen privacyverklaring: verantwoordelijke persoon/organisatie + adres, e-mailadres, juridische grondslagen, opslagregio en doorgifte buiten de EER — wacht op tekst van de eigenaar
+- [ ] Contactgegevens — wacht op tekst van de eigenaar
