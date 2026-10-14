@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ShieldCheck } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { GameLayout } from '@/components/game-layout';
 import { pageHead } from '@/lib/page-head';
 

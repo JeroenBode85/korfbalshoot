@@ -293,3 +293,21 @@ button.podium-item { font: inherit; color: inherit; cursor: pointer; text-align:
 .week-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; color: var(--muted-foreground); font-weight: 600; font-size: 0.9rem; }
 .week-bar label { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--foreground); }
 .week-bar select { min-height: 2.75rem; border-radius: 0.75rem; border: 1px solid var(--border); background: var(--secondary); color: var(--foreground); padding: 0 0.75rem; font: inherit; max-width: 100%; }
+.legal-page { padding: 56px 0 80px; }
+.legal-inner { max-width: 780px; }
+.legal-page h1 { font-size: 45px; font-weight: 800; margin-top: 12px; line-height: 1.12; }
+.legal-updated { margin-top: 12px; color: var(--muted-foreground); font-size: 13px; font-weight: 700; letter-spacing: .4px; }
+.legal-lead { margin-top: 26px; font-size: 16px; line-height: 1.7; }
+.legal-body { margin-top: 36px; display: grid; gap: 30px; }
+.legal-body section { border-top: 1px solid var(--border); padding-top: 22px; }
+.legal-body h2 { font-size: 22px; font-weight: 700; }
+.legal-body p { margin-top: 12px; color: var(--muted-foreground); font-size: 15px; line-height: 1.75; }
+.legal-note { border-left: 3px solid var(--gold); padding-left: 14px; color: var(--foreground); font-weight: 600; }
+.legal-fill { display: inline-block; padding: 2px 8px; border-radius: 8px; border: 1px dashed color-mix(in oklab, var(--gold) 55%, transparent); background: color-mix(in oklab, var(--gold) 13%, transparent); color: var(--foreground); font-size: .95em; }
+.legal-open .legal-fill { display: block; padding: 14px 16px; line-height: 1.7; }
+@media (max-width: 640px) {
+  .legal-page { padding-top: 25px; }
+  .legal-page h1 { font-size: 34px; }
+  .legal-body h2 { font-size: 19px; }
+  .legal-body p { font-size: 14px; }
+}
