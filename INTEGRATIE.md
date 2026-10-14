@@ -34,7 +34,7 @@ De clubnaam, stand en score worden al in server-gerenderde metadata getoond. Een
 - Startscherm, ballencollectie, dagveld en nachtveld zijn als originele assets opgeslagen.
 - Voor een nog vrijere openingscompositie: los transparant logo, korf+paal en geel-blauwe bal aanleveren. De huidige screenshot blijft intact qua verhouding.
 - Geen clublogo’s aangeleverd: initialenemblemen gebruikt.
-- De privacyverklaring van de eigenaar (versie 14 oktober 2026) staat als eigen pagina op `/privacyverklaring`, met de voettekstmknop als koppeling. Drie velden zijn nog niet ingevuld en worden op de pagina als zodanig gemarkeerd: naam verantwoordelijke persoon of organisatie met adres, e-mailadres, en de juridische grondslagen inclusief opslagregio en eventuele doorgifte buiten de EER met waarborgen. Contactgegevens ontbreken nog; de contactknop in de voettekst zegt dit eerlijk en verzint niets.
+- De privacyverklaring van de eigenaar (versie 14 oktober 2026) staat als eigen pagina op `/privacyverklaring`, met de voettekstmknop als koppeling. De pagina bevat uitsluitend de tekst van de eigenaar: de beheerders en het e-mailadres info@korfbalshoot.nl staan in de inleiding en bij "Jouw rechten". Er staan geen gemarkeerde invulvelden meer op de pagina. De contactknop in de voettekst is nog een plaatshouder en verzint niets.
 - Deelkaarten gebruiken momenteel typografische branding; voor het originele grafische game-logo in de kaart is een transparant los logo nodig.
 
 ## Publicatie

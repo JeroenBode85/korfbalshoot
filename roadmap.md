@@ -8,5 +8,4 @@
 - [ ] Contributing players per club — blocked by missing public endpoint
 - [ ] Crawler preview images — blocked by approved public image hosting/endpoint; no backend changes authorized
 - [x] Privacyverklaring opgenomen als eigen pagina (/privacyverklaring) met server-gerenderde metadata en voettekstkoppeling
-- [ ] Invullen privacyverklaring: juridische grondslagen, opslagregio en doorgifte buiten de EER — wacht op tekst van de eigenaar
 - [ ] Contactknop in de voettekst is nog een plaatshouder — info@korfbalshoot.nl is bekend, wachten op bevestiging om de knop eraan te koppelen
