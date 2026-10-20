@@ -12,3 +12,4 @@
 - Keep public competition data behind one read-only API adapter; preserve upstream positions and scores because the game server owns ranking rules.
 - Use leaf route metadata and shareable ranking/club routes; personal results remain unavailable until a safe public endpoint exists.
 - Keep the Google Play destination and availability in one browser-safe configuration module so release status can change without redesigning controls.
+- Resolve club logos through the public standings adapter and render them in the shared emblem; match player club names only to a unique exact public club record, never guess codes.

@@ -1,14 +1,15 @@
 import { queryOptions } from '@tanstack/react-query';
 import { z } from 'zod';
 import { gameConfig } from './game-config';
+import { clubLogoUrl, findPlayerClub } from './club-logo';
 
-const clubSchema = z.object({ id: z.string(), name: z.string(), city: z.string(), score: z.number().nonnegative(), position: z.number().nonnegative(), participants: z.number().nonnegative() });
+const clubSchema = z.object({ id: z.string(), name: z.string(), city: z.string(), score: z.number().nonnegative(), position: z.number().nonnegative(), participants: z.number().nonnegative(), logo_url: z.string().nullable().optional() });
 const playerSchema = z.object({ position: z.number().nonnegative(), player_name: z.string(), club: z.string().nullable().optional(), score: z.number().nonnegative() });
 const pageSchema = <T extends z.ZodTypeAny>(row: T) => z.object({ rows: z.array(row), total: z.number().nullable().optional(), week: z.string().nullable().optional(), week_end: z.string().nullable().optional(), updated_at: z.string().optional() });
 const weeksSchema = z.object({ rows: z.array(z.object({ week: z.string() })) });
 
 export type Club = z.infer<typeof clubSchema>;
-export type Player = { position: number; name: string; club: string | null; score: number };
+export type Player = { position: number; name: string; club: string | null; score: number; logoUrl?: string | undefined };
 export type ClubResult = { clubs: Club[]; fetchedAt: string; error: boolean };
 export type PlayerResult = { players: Player[]; week: string | null; weekEnd: string | null; fetchedAt: string; error: boolean };
 
@@ -67,7 +68,8 @@ export function getPlayers(kind: 'world' | 'week', week?: string): Promise<Playe
   return cached(query, async () => {
     try {
       const { rows, meta } = await fetchAll(`${gameConfig.standingsApi}?${query}`, playerSchema);
-      return { players: rows.map(row => ({ position: row.position, name: row.player_name, club: row.club ?? null, score: row.score })), week: meta?.week ?? null, weekEnd: meta?.week_end ?? null, fetchedAt: new Date().toISOString(), error: false };
+      const { clubs } = rows.some(row => row.club) ? await getClubs() : { clubs: [] };
+      return { players: rows.map(row => { const club = findPlayerClub(row.club ?? null, clubs); return { position: row.position, name: row.player_name, club: row.club ?? null, score: row.score, ...(club ? { logoUrl: clubLogoUrl(club) } : {}) }; }), week: meta?.week ?? null, weekEnd: meta?.week_end ?? null, fetchedAt: new Date().toISOString(), error: false };
     } catch { return { players: [], week: null, weekEnd: null, fetchedAt: '', error: true }; }
   }, value => !value.error);
 }

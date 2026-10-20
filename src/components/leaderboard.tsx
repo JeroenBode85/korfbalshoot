@@ -4,26 +4,28 @@ import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, Building2, CalendarDays, Clock, Info, Loader2, RefreshCw, Search, Share2, Trophy, Users } from 'lucide-react';
 import { Button } from './ui/button';
 import { ShareDialog } from './share-dialog';
-import { clubsQuery, formatTime, formatWeek, initials, playersQuery, weeksQuery, type Club, type ClubResult, type Player, type PlayerResult } from '@/lib/standings';
+import { clubsQuery, formatTime, formatWeek, playersQuery, weeksQuery, type Club, type ClubResult, type Player, type PlayerResult } from '@/lib/standings';
+import { clubLogoUrl } from '@/lib/club-logo';
+import { ClubEmblem } from './club-emblem';
 
 export type InitialStandings = { clubs?: ClubResult | undefined; players?: PlayerResult | undefined; weeks?: { weeks: string[]; error: boolean } | undefined };
 import { rankingLabels, type RankingMode } from '@/lib/game-config';
 import type { ShareData } from '@/lib/share-card';
 
-export function ClubEmblem({ name }: { name: string }) { return <span className="club-emblem" aria-hidden="true">{initials(name)}</span>; }
+export { ClubEmblem } from './club-emblem';
 
-type Entry = { key: string; position: number; name: string; detail: string; meta: string; score: number; clubId?: string };
+type Entry = { key: string; position: number; name: string; detail: string; meta: string; score: number; clubId?: string; logoUrl?: string | undefined; emblemName?: string };
 const plural = (n: number) => `${n} ${n === 1 ? 'speler' : 'spelers'}`;
-const fromClub = (c: Club): Entry => ({ key: c.id, position: c.position, name: c.name, detail: c.city, meta: plural(c.participants), score: c.score, clubId: c.id });
-const fromPlayer = (p: Player, i: number): Entry => ({ key: `${p.position}-${i}`, position: p.position, name: p.name, detail: p.club ?? 'Geen vereniging', meta: p.club ?? 'Geen vereniging', score: p.score });
+const fromClub = (c: Club): Entry => ({ key: c.id, position: c.position, name: c.name, detail: c.city, meta: plural(c.participants), score: c.score, clubId: c.id, logoUrl: clubLogoUrl(c) });
+const fromPlayer = (p: Player, i: number): Entry => ({ key: `${p.position}-${i}`, position: p.position, name: p.name, detail: p.club ?? 'Geen vereniging', meta: p.club ?? 'Geen vereniging', score: p.score, logoUrl: p.logoUrl, emblemName: p.logoUrl ? p.club ?? p.name : p.name });
 
 function EntryName({ entry }: { entry: Entry }) {
-  const body = <><ClubEmblem name={entry.name}/><div className="min-w-0"><h3>{entry.name}</h3><p>{entry.detail}{entry.clubId && <span className="sm:hidden"> · {entry.meta}</span>}</p></div></>;
+  const body = <><ClubEmblem name={entry.emblemName ?? entry.name} logoUrl={entry.logoUrl}/><div className="min-w-0"><h3>{entry.name}</h3><p>{entry.detail}{entry.clubId && <span className="sm:hidden"> · {entry.meta}</span>}</p></div></>;
   return entry.clubId ? <Link to="/verenigingen/$clubId" params={{ clubId: entry.clubId }} className="club-name-cell">{body}</Link> : <div className="club-name-cell">{body}</div>;
 }
 function Podium({ entries, onShare }: { entries: Entry[]; onShare: (e: Entry) => void }) {
   return <div className="podium" aria-label="Hoogste standen">{entries.map(entry => {
-    const inner = <><span className="podium-medal" aria-hidden="true">{entry.position}</span><span className="podium-rank">{entry.position === 1 && <Trophy className="size-3"/>}{entry.position}e plaats</span><ClubEmblem name={entry.name}/><h3>{entry.name}</h3><p>{entry.detail}</p><strong className="podium-score">{entry.score.toLocaleString('nl-NL')}</strong><small>punten{entry.clubId ? <span className="podium-meta"> · {entry.meta}</span> : ''}</small></>;
+    const inner = <><span className="podium-medal" aria-hidden="true">{entry.position}</span><span className="podium-rank">{entry.position === 1 && <Trophy className="size-3"/>}{entry.position}e plaats</span><ClubEmblem name={entry.emblemName ?? entry.name} logoUrl={entry.logoUrl}/><h3>{entry.name}</h3><p>{entry.detail}</p><strong className="podium-score">{entry.score.toLocaleString('nl-NL')}</strong><small>punten{entry.clubId ? <span className="podium-meta"> · {entry.meta}</span> : ''}</small></>;
     return entry.clubId
       ? <Link to="/verenigingen/$clubId" params={{ clubId: entry.clubId }} className="podium-item" data-rank={Math.min(entry.position, 3)} key={entry.key}>{inner}</Link>
       : <button type="button" className="podium-item" data-rank={Math.min(entry.position, 3)} key={entry.key} onClick={() => onShare(entry)} aria-label={`Deel resultaat van ${entry.name}`}>{inner}</button>;
