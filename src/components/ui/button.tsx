@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         game: "game-button bg-primary text-primary-foreground hover:bg-primary/90",
         gameOutline: "game-button border border-border bg-secondary/50 text-foreground hover:bg-secondary",
-        tab: "min-h-11 rounded-lg text-muted-foreground hover:text-foreground data-[active=true]:bg-primary data-[active=true]:text-primary-foreground",
+        tab: "min-h-11 rounded-full border border-border bg-secondary text-muted-foreground hover:text-foreground hover:border-primary/70 data-[active=true]:bg-primary data-[active=true]:text-primary-foreground data-[active=true]:border-primary data-[active=true]:font-extrabold",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
