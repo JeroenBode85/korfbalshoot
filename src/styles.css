@@ -12,7 +12,7 @@
   --color-popover: var(--secondary);
   --color-popover-foreground: var(--foreground);
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--foreground);
+  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--foreground);
   --color-muted: var(--muted);
@@ -32,24 +32,25 @@
   --radius-sm: .5rem;
 }
 :root {
-  --background: oklch(0.281 0.154 298);
-  --foreground: oklch(1 0 0);
-  --card: oklch(0.33 0.14 299);
-  --secondary: oklch(0.224 0.13 298);
-  --primary: oklch(0.568 0.249 337);
-  --muted: oklch(0.355 0.138 299);
-  --muted-foreground: oklch(0.807 0.065 302);
-  --accent: oklch(0.435 0.185 299);
-  --border: oklch(0.535 0.139 298 / .42);
-  --gold: oklch(0.883 0.165 92);
-  --silver: oklch(0.851 0.02 279);
-  --bronze: oklch(0.709 0.11 51);
+  --background: #290C50;
+  --foreground: #FFFFFF;
+  --card: #380F66;
+  --secondary: #380F66;
+  --primary: #FFD61F;
+  --primary-foreground: #290C50;
+  --muted: #451A73;
+  --muted-foreground: #C9AEE6;
+  --accent: #451A73;
+  --border: rgb(143 61 224 / .5);
+  --gold: #FFD61F;
+  --silver: #D8DCE6;
+  --bronze: #C98A4B;
   --field: oklch(0.72 0.184 144);
   --destructive: oklch(0.72 0.19 20);
-  --hero: oklch(0.366 0.2 299);
-  --hero-light: oklch(0.481 0.248 300);
-  --shadow-game: 0 5px 0 color-mix(in oklab, var(--secondary) 70%, transparent), 0 12px 24px color-mix(in oklab, var(--secondary) 40%, transparent);
-  --shadow-text: 0 5px 0 color-mix(in oklab, var(--secondary) 75%, transparent);
+  --hero: #38106A;
+  --hero-light: #5B2A9E;
+  --shadow-game: 0 5px 0 rgb(26 7 54 / .7), 0 12px 24px rgb(26 7 54 / .4);
+  --shadow-text: 0 5px 0 rgb(26 7 54 / .75);
 }
 @layer base {
   * { border-color: var(--border); }
@@ -60,7 +61,7 @@
   button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
   h1, h2, h3, p { margin: 0; }
   button { font-family: inherit; }
-  ::selection { background: var(--primary); color: var(--foreground); }
+  ::selection { background: var(--primary); color: var(--primary-foreground); }
 }
 .container-game { width: min(1120px, calc(100% - 64px)); margin-inline: auto; }
 .site-header { height: 88px; border-bottom: 1px solid var(--border); background: var(--secondary); }
@@ -103,7 +104,7 @@
 .section-heading h2, .game-section h2 { font-size: 38px; line-height: 1.15; font-weight: 800; margin-top: 9px; }
 .section-heading p { font-size: 15px; color: var(--muted-foreground); margin-top: 10px; line-height: 1.5; }
 .ranking-controls { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 24px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
-.ranking-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); background: var(--secondary); padding: 5px; border-radius: 12px; gap: 4px; }
+.ranking-tabs { display: flex; flex-wrap: wrap; gap: 10px; }
 .ranking-tabs > * { min-width: 115px; font-weight: 700; }
 .search-control { position: relative; width: min(100%,340px); justify-self: end; }
 .search-control > svg { position: absolute; left: 15px; top: 15px; width: 18px; height: 18px; color: var(--muted-foreground); }
@@ -122,8 +123,8 @@
 .podium-item[data-rank="3"] .podium-medal { background: var(--bronze); }
 .podium-rank { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted-foreground); margin-bottom: 13px; }
 .podium-item[data-rank="1"] .podium-rank { color: var(--gold); }
-.club-emblem { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; background: var(--accent); color: var(--foreground); border-radius: 12px; font-size: 14px; font-weight: 800; }
-.podium-item .club-emblem { margin: 0 auto 14px; width: 66px; height: 66px; font-size: 20px; border-radius: 16px; border: 1px solid var(--border); }
+.club-emblem { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; background: var(--accent); color: var(--foreground); border-radius: 50%; font-size: 14px; font-weight: 800; }
+.podium-item .club-emblem { margin: 0 auto 14px; width: 66px; height: 66px; font-size: 20px; border-radius: 50%; border: 1px solid var(--border); }
 .podium-item h3 { font-size: 21px; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
 .podium-item p { color: var(--muted-foreground); font-size: 14px; margin-top: 5px; }
 .podium-score { display: block; font-size: 42px; font-weight: 900; line-height: 1; color: var(--gold); margin-top: 14px; }
