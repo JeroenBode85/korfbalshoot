@@ -9,7 +9,7 @@ const pageSchema = <T extends z.ZodTypeAny>(row: T) => z.object({ rows: z.array(
 const weeksSchema = z.object({ rows: z.array(z.object({ week: z.string() })) });
 
 export type Club = z.infer<typeof clubSchema>;
-export type Player = { position: number; name: string; club: string | null; score: number; logoUrl?: string };
+export type Player = { position: number; name: string; club: string | null; score: number; logoUrl?: string | undefined };
 export type ClubResult = { clubs: Club[]; fetchedAt: string; error: boolean };
 export type PlayerResult = { players: Player[]; week: string | null; weekEnd: string | null; fetchedAt: string; error: boolean };
 

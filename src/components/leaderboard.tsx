@@ -14,7 +14,7 @@ import type { ShareData } from '@/lib/share-card';
 
 export { ClubEmblem } from './club-emblem';
 
-type Entry = { key: string; position: number; name: string; detail: string; meta: string; score: number; clubId?: string; logoUrl?: string; emblemName?: string };
+type Entry = { key: string; position: number; name: string; detail: string; meta: string; score: number; clubId?: string; logoUrl?: string | undefined; emblemName?: string };
 const plural = (n: number) => `${n} ${n === 1 ? 'speler' : 'spelers'}`;
 const fromClub = (c: Club): Entry => ({ key: c.id, position: c.position, name: c.name, detail: c.city, meta: plural(c.participants), score: c.score, clubId: c.id, logoUrl: clubLogoUrl(c) });
 const fromPlayer = (p: Player, i: number): Entry => ({ key: `${p.position}-${i}`, position: p.position, name: p.name, detail: p.club ?? 'Geen vereniging', meta: p.club ?? 'Geen vereniging', score: p.score, logoUrl: p.logoUrl, emblemName: p.logoUrl ? p.club ?? p.name : p.name });

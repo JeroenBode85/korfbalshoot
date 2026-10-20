@@ -1,4 +1,4 @@
-export type LogoClub = { id: string; name: string; logo_url?: string | null };
+export type LogoClub = { id: string; name: string; logo_url?: string | null | undefined };
 
 export function clubLogoUrl(club: Pick<LogoClub, 'id' | 'logo_url'>): string | undefined {
   if (club.logo_url) {
