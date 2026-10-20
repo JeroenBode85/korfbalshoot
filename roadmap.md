@@ -1,4 +1,5 @@
 # Korfbal Shoot website
+- [ ] Club logos in existing badges, with exact club matching and loading/error fallback; verify live rankings on desktop/mobile.
 - [x] Game-inspired homepage and responsive navigation
 - [x] Public club data, ranking search, club pages and unavailable personal standings
 - [x] Sharing links and downloadable square/story cards
