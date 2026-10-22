@@ -1,4 +1,4 @@
-export type ShareData = { title: string; subtitle: string; score?: number; position?: number; fetchedAt: string; url: string; leaders?: string[]; detail?: string };
+export type ShareData = { title: string; subtitle: string; score?: number; position?: number; fetchedAt: string; url: string; leaders?: string[]; detail?: string; emblemName?: string; logoUrl?: string | undefined; leaderEmblems?: { name: string; logoUrl?: string | undefined }[] };
 
 export async function downloadShareCard(data: ShareData, story: boolean) {
   await document.fonts.ready;

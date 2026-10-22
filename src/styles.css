@@ -315,3 +315,9 @@ button.podium-item { font: inherit; color: inherit; cursor: pointer; text-align:
   .legal-body h2 { font-size: 19px; }
   .legal-body p { font-size: 14px; }
 }
+
+.share-emblem { display: flex; justify-content: center; margin: 4px 0 2px; }
+.share-emblem .club-emblem { width: 56px; height: 56px; border-radius: 50%; }
+.share-leader { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; }
+.share-leader .club-emblem { width: 26px; height: 26px; flex: none; border-radius: 50%; font-size: 10px; }
+.share-leader span:last-child { min-width: 0; overflow-wrap: anywhere; }
