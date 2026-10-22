@@ -10,11 +10,12 @@ import { ClubEmblem } from './club-emblem';
 
 export type InitialStandings = { clubs?: ClubResult | undefined; players?: PlayerResult | undefined; weeks?: { weeks: string[]; error: boolean } | undefined };
 import { rankingLabels, type RankingMode } from '@/lib/game-config';
-import type { ShareData } from '@/lib/share-card';
+import type { ShareData, ShareEntry } from '@/lib/share-card';
 
 export { ClubEmblem } from './club-emblem';
 
 type Entry = { key: string; position: number; name: string; detail: string; meta: string; score: number; clubId?: string; logoUrl?: string | undefined; emblemName?: string };
+const toShare = (e: Entry): ShareEntry => ({ position: e.position, name: e.name, detail: e.detail, score: e.score, meta: e.clubId ? e.meta : undefined, emblemName: e.emblemName ?? e.name, logoUrl: e.logoUrl });
 const plural = (n: number) => `${n} ${n === 1 ? 'speler' : 'spelers'}`;
 const fromClub = (c: Club): Entry => ({ key: c.id, position: c.position, name: c.name, detail: c.city, meta: plural(c.participants), score: c.score, clubId: c.id, logoUrl: clubLogoUrl(c) });
 const fromPlayer = (p: Player, i: number): Entry => ({ key: `${p.position}-${i}`, position: p.position, name: p.name, detail: p.club ?? 'Geen vereniging', meta: p.club ?? 'Geen vereniging', score: p.score, logoUrl: p.logoUrl, emblemName: p.logoUrl ? p.club ?? p.name : p.name });
@@ -69,13 +70,13 @@ export function Leaderboard({ mode = 'verenigingen', full = false, week, initial
   const weekEnd = players.data?.weekEnd ?? null;
   const subtitle = mode === 'week' && currentWeek ? `Weekklassement · ${formatWeek(currentWeek)}` : rankingLabels[mode] === 'Overall' ? 'Overall klassement' : 'Verenigingen';
   const pageUrl = () => `${window.location.origin}/klassementen?type=${mode}${mode === 'week' && currentWeek ? `&week=${currentWeek}` : ''}`;
-  const shareEntry = (e: Entry) => setShareData({ title: e.name, subtitle, position: e.position, score: e.score, ...(e.clubId ? {} : { detail: e.detail }), ...(e.clubId || e.logoUrl ? { emblemName: e.emblemName ?? e.name, logoUrl: e.logoUrl } : {}), fetchedAt, url: e.clubId ? `${window.location.origin}/verenigingen/${encodeURIComponent(e.clubId)}` : pageUrl() });
+  const shareEntry = (e: Entry) => setShareData({ title: e.name, subtitle, position: e.position, score: e.score, ...(e.clubId ? {} : { detail: e.detail }), fetchedAt, entries: [toShare(e)], url: e.clubId ? `${window.location.origin}/verenigingen/${encodeURIComponent(e.clubId)}` : pageUrl() });
   const loading = active.isPending;
   const noun = isClubs ? 'verenigingen' : 'spelers';
 
   return <section className="ranking-section" id="klassementen"><div className="container-game">
     <div className="section-heading"><div><span className="eyebrow"><Trophy/>DE STRIJD OM DE TOP</span><h2>{full ? 'De klassementen' : 'Wie raakt de top?'}</h2><p>{isClubs ? 'Elke rake bal telt. Voor jou én je vereniging.' : mode === 'week' ? 'Een nieuwe week. Een nieuwe kans op de eerste plek.' : 'De beste persoonlijke records, op één plek.'}</p></div>
-      <Button variant="gameOutline" className="section-share" disabled={error || all.length === 0} onClick={() => setShareData({ title: isClubs ? 'De top van de verenigingen' : mode === 'week' ? 'De top van deze week' : 'De overall top', subtitle, fetchedAt, leaders: all.slice(0, 3).map(e => `#${e.position} ${e.name} · ${e.score.toLocaleString('nl-NL')} punten`), leaderEmblems: all.slice(0, 3).map(e => ({ name: e.emblemName ?? e.name, logoUrl: e.logoUrl })), url: pageUrl() })}><Share2/><span>Deel de top 3</span></Button></div>
+      <Button variant="gameOutline" className="section-share" disabled={error || all.length === 0} onClick={() => setShareData({ title: isClubs ? 'De top van de verenigingen' : mode === 'week' ? 'De top van deze week' : 'De overall top', subtitle, fetchedAt, entries: all.slice(0, 3).map(toShare), url: pageUrl() })}><Share2/><span>Deel de top 3</span></Button></div>
     <div className="ranking-controls"><nav className="ranking-tabs" aria-label="Kies klassement">{(['overall', 'week', 'verenigingen'] as const).map(value => <Button key={value} variant="tab" data-active={mode === value} asChild><Link to="/klassementen" search={{ type: value }} aria-current={mode === value ? 'page' : undefined}>{value === 'overall' ? <Trophy/> : value === 'week' ? <CalendarDays/> : <Building2/>}{rankingLabels[value]}</Link></Button>)}</nav>
       <label className="search-control"><Search/><input aria-label="Zoek in geladen resultaten" placeholder="Zoek in geladen resultaten…" value={search} maxLength={100} disabled={loading || error} onChange={event => { setSearch(event.target.value); setLimit(8); }}/></label></div>
     {mode === 'week' && <div className="week-bar"><label><CalendarDays className="size-4"/><span className="sr-only">Kies een week</span><select value={currentWeek ?? ''} onChange={event => navigate({ to: '/klassementen', search: { type: 'week', week: event.target.value || undefined } })}>{currentWeek && !(weeks.data?.weeks ?? []).includes(currentWeek) && <option value={currentWeek}>{formatWeek(currentWeek)}</option>}{(weeks.data?.weeks ?? []).map(w => <option key={w} value={w}>{formatWeek(w)}</option>)}</select></label>{weekEnd && <Countdown end={weekEnd}/>}</div>}
