@@ -321,3 +321,12 @@ button.podium-item { font: inherit; color: inherit; cursor: pointer; text-align:
 .share-leader { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; }
 .share-leader .club-emblem { width: 26px; height: 26px; flex: none; border-radius: 50%; font-size: 10px; }
 .share-leader span:last-child { min-width: 0; overflow-wrap: anywhere; }
+
+.share-preview .share-podium { margin: 34px 0 10px; gap: 8px; }
+.share-preview .share-podium[data-count='1'] { grid-template-columns: minmax(0, 220px); justify-content: center; }
+.share-preview .share-podium[data-count='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.share-preview .share-podium .podium-item { padding: 26px 6px 12px; }
+.share-preview .share-podium .podium-item h3 { font-size: 14px; overflow-wrap: anywhere; }
+.share-preview .share-podium .podium-score { font-size: 26px; }
+.share-preview .share-podium .podium-medal { width: 34px; height: 34px; font-size: 17px; top: -17px; }
+.share-preview .share-podium .club-emblem { width: 40px; height: 40px; }
