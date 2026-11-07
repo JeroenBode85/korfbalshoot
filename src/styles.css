@@ -215,6 +215,7 @@
   .wordmark { font-size: 17px; }
   .wordmark-symbol { width: 30px; height: 30px; }
   .header-download { min-height: 44px; padding-inline: 12px; font-size: 12px; }
+  .store-buttons-compact .store-badge { display: none; }
   .nav-links { grid-column: 1/-1; grid-row: 2; justify-content: center; gap: 35px; font-size: 13px; }
   .nav-links a { padding-block: 14px; }
   .hero-layout { grid-template-columns: 1fr; gap: 0; min-height: auto; text-align: center; }
