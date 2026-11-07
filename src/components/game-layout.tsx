@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { Download, Mail, Play, Trophy } from 'lucide-react';
+import { Download, Mail, Trophy } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { images } from '@/lib/images';
 const appIcon = images.appIcon;
@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { gameConfig } from '@/lib/game-config';
 
 export function PlayButton({ compact = false }: { compact?: boolean }) {
-  return <span className={compact ? 'store-buttons store-buttons-compact' : 'store-buttons'}><Button variant="game" className={compact ? 'header-download' : ''} asChild><a href={gameConfig.playUrl} target="_blank" rel="noopener noreferrer"><Play fill="currentColor" />{gameConfig.comingSoon ? 'Binnenkort op Google Play' : compact ? 'Download de game' : 'Download op Google Play'}</a></Button><a className="store-badge" href={gameConfig.appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Download Korfbal Shoot! in de App Store"><img src={images.appStoreBadge.url} alt="Download in de App Store" width="120" height="40"/></a></span>;
+  return <span className={compact ? 'store-buttons store-buttons-compact' : 'store-buttons'}><a className="store-button" href={gameConfig.playUrl} target="_blank" rel="noopener noreferrer" aria-label="Download Korfbal Shoot! op Google Play"><img src={images.googlePlayLogo.url} alt="" width="22" height="22"/><span>Google Play</span></a><a className="store-button" href={gameConfig.appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Download Korfbal Shoot! in de App Store"><img src={images.appleLogo.url} alt="" width="22" height="22"/><span>App Store</span></a></span>;
 }
 export function Wordmark() {
   return <Link to="/" className="wordmark" aria-label="Korfbal Shoot! Startpagina"><img className="wordmark-symbol" src={appIcon.url} alt="" width="39" height="39"/><span>KORFBAL<br/><span>SHOOT!</span></span></Link>;
