@@ -216,8 +216,8 @@
   .header-inner { grid-template-columns: minmax(0,1fr) auto; gap: 6px 10px; padding-top: 17px; }
   .wordmark { font-size: 17px; }
   .wordmark-symbol { width: 30px; height: 30px; }
-  .header-download { min-height: 44px; padding-inline: 12px; font-size: 12px; }
-  .store-buttons-compact .store-badge { display: none; }
+  .store-buttons:not(.store-buttons-compact) { grid-auto-flow: row; grid-auto-columns: unset; grid-template-columns: 1fr; width: 100%; max-width: 340px; }
+  .store-buttons-compact .store-button:last-child { display: none; }
   .nav-links { grid-column: 1/-1; grid-row: 2; justify-content: center; gap: 35px; font-size: 13px; }
   .nav-links a { padding-block: 14px; }
   .hero-layout { grid-template-columns: 1fr; gap: 0; min-height: auto; text-align: center; }
