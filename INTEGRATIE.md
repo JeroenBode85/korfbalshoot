@@ -8,7 +8,7 @@
 - Eigen server-gerenderde titel en Open Graph-beschrijving voor startpagina, ranglijsten, iedere club en de privacyverklaring.
 
 ## Configuratie
-`src/lib/game-config.ts`: Play Store-link en `comingSoon`. Zet `comingSoon` op `true` voor de tekst “Binnenkort op Google Play”. De openbare beschikbaarheid en appbeoordelingen zijn niet geverifieerd; er worden geen ratings of downloadaantallen getoond.
+`src/lib/game-config.ts`: Play Store-link, App Store-link (`appStoreUrl`, sinds 7 nov 2026) en `comingSoon`. Zet `comingSoon` op `true` voor de tekst “Binnenkort op Google Play”. De officiële Nederlandstalige App Store-badge (`public/images/app-store-badge.svg`, via Apple Media Services) staat naast elke Google Play-knop; in de mobiele kop is alleen de gele knop zichtbaar. De openbare beschikbaarheid en appbeoordelingen zijn niet geverifieerd; er worden geen ratings of downloadaantallen getoond.
 
 De openbare API wordt rechtstreeks gelezen, zonder sleutel, login of schrijfrechten. Geen nieuw Cloud-project aangemaakt, geen wijzigingen in de bestaande gameomgeving. Gegevens worden 60 seconden gecachet per proces/browser en door de upstream API. Bij een nieuwe serverinstantie kan een nieuwe read plaatsvinden; upstream rate limiting moet door de eigenaar worden bevestigd. Search en limit worden upstream genegeerd; offset werkt. Websitepaginering en zoeken worden op de veilig opgehaalde clubgegevens toegepast, zonder scores of posities te herberekenen.
 
