@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountVerwijderenRouteImport } from './routes/account-verwijderen'
 import { Route as KlassementenRouteImport } from './routes/klassementen'
 import { Route as PrivacyverklaringRouteImport } from './routes/privacyverklaring'
 import { Route as KlassementenModeRouteImport } from './routes/klassementen.$mode'
@@ -18,6 +19,11 @@ import { Route as VerenigingenClubIdRouteImport } from './routes/verenigingen.$c
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountVerwijderenRoute = AccountVerwijderenRouteImport.update({
+  id: '/account-verwijderen',
+  path: '/account-verwijderen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KlassementenRoute = KlassementenRouteImport.update({
@@ -43,6 +49,7 @@ const VerenigingenClubIdRoute = VerenigingenClubIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account-verwijderen': typeof AccountVerwijderenRoute
   '/klassementen': typeof KlassementenRouteWithChildren
   '/privacyverklaring': typeof PrivacyverklaringRoute
   '/klassementen/$mode': typeof KlassementenModeRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account-verwijderen': typeof AccountVerwijderenRoute
   '/klassementen': typeof KlassementenRouteWithChildren
   '/privacyverklaring': typeof PrivacyverklaringRoute
   '/klassementen/$mode': typeof KlassementenModeRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account-verwijderen': typeof AccountVerwijderenRoute
   '/klassementen': typeof KlassementenRouteWithChildren
   '/privacyverklaring': typeof PrivacyverklaringRoute
   '/klassementen/$mode': typeof KlassementenModeRoute
@@ -67,6 +76,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account-verwijderen'
     | '/klassementen'
     | '/privacyverklaring'
     | '/klassementen/$mode'
@@ -74,6 +84,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/account-verwijderen'
     | '/klassementen'
     | '/privacyverklaring'
     | '/klassementen/$mode'
@@ -81,6 +92,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/account-verwijderen'
     | '/klassementen'
     | '/privacyverklaring'
     | '/klassementen/$mode'
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountVerwijderenRoute: typeof AccountVerwijderenRoute
   KlassementenRoute: typeof KlassementenRouteWithChildren
   PrivacyverklaringRoute: typeof PrivacyverklaringRoute
   VerenigingenClubIdRoute: typeof VerenigingenClubIdRoute
@@ -101,6 +114,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account-verwijderen': {
+      id: '/account-verwijderen'
+      path: '/account-verwijderen'
+      fullPath: '/account-verwijderen'
+      preLoaderRoute: typeof AccountVerwijderenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/klassementen': {
@@ -148,6 +168,7 @@ const KlassementenRouteWithChildren = KlassementenRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountVerwijderenRoute: AccountVerwijderenRoute,
   KlassementenRoute: KlassementenRouteWithChildren,
   PrivacyverklaringRoute: PrivacyverklaringRoute,
   VerenigingenClubIdRoute: VerenigingenClubIdRoute,
